@@ -1,0 +1,101 @@
+        else if (bot.bot1mines > 0) {
+            task = "thievery1";
+        }
+        
+        else if (bot.bot2mines > 0) {
+            task = "thievery2";
+        }
+        
+        else if (bot.bot3mines > 0) {
+            task = "thievery3";
+        }
+        
+        else if (bot.bot4mines > 0) {
+            task = "thievery4";
+        }
+        
+        
+        
+                if (task === "thievery1") {
+            var closestmine1 = bot.bot1mines[i];
+            for (i = 0; i < bot.bot1mines.length; i++) {
+                if (bot.findDistance(myPos, closestmine1) > bot.findDistance(myPos, bot.bot1mines[i])){
+                    closestmine1 = bot.bot1mines[i];
+                }
+            }
+            console.log("Steal!");
+            myDir = bot.findPath(myPos, closestmine1);
+        }
+        
+        if (task === "thievery2") {
+            var closestmine2 = bot.bot2mines[i];
+            for (i = 1; i < bot.bot2mines.length; i++) {
+                if (bot.findDistance(myPos, closestmine2) > bot.findDistance(myPos, bot.bot2mines[i])){
+                    closestmine2 = bot.bot2mines[i];
+                }
+            }
+            console.log("Steal!");
+            myDir = bot.findPath(myPos, closestmine2);
+        }
+        
+        if (task === "thievery3") {
+            var closestmine3 = bot.bot3mines[i];
+            for (i = 1; i < bot.bot3mines.length; i++) {
+                if (bot.findDistance(myPos, closestmine3) > bot.findDistance(myPos, bot.bot3mines[i])){
+                    closestmine3 = bot.bot3mines[i];
+                }
+            }
+            console.log("Steal!");
+            myDir = bot.findPath(myPos, closestmine3);
+        }
+        
+        if (task === "thievery4") {
+            var closestmine4 = bot.bot4mines[i];
+            for (i = 1; i < bot.bot4mines.length; i++) {
+                if (bot.findDistance(myPos, closestmine4) > bot.findDistance(myPos, bot.bot4mines[i])){
+                    closestmine4 = bot.bot4mines[i];
+                }
+            }
+            console.log("Steal!");
+            myDir = bot.findPath(myPos, closestmine4);
+        }
+        
+        
+bot.findDistance
+pass myPos and enemyBot I want to attack
+
+        
+Use this except with enemyMines:
+    if(bot.findDistance(myPos,[closestBot.pos.x,closestBot.pos.y]) > bot.findDistance(myPos,[enemyBots[i].pos.x,enemyBots[i].pos.y])) {
+        closestBot=enemyBots[i];
+
+Attack nearby enemy code:
+        else if (bot.enemyBot.pos.x, bot.enemyBot.pos.y === ________ ) {
+            task="attack"
+        }
+        
+        
+        
+        
+3/22/2016
+    I AM LITERALLY SET TO ATTACK PEOPLE EVEN WHEN:
+        - there are free mines.
+        - I coded (tried to) to steal mines.
+        
+    However:
+        - I heal properly.
+        
+        
+Hesby:
+Yes, bot.findDistance(myPos, [whateverbot.pos.x, whateverbot.pos.y])  where whateverbot is equal to the variable that contains the bot's object. 
+
+
+
+
+        else if (bot.freeMines.length > 0) { 
+            task="freemines";
+        }
+        
+        else {
+            task="attack";
+        }

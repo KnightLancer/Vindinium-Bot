@@ -1,7 +1,7 @@
 var Bot = require('bot');
 var PF = require('pathfinding');
-var bot = new Bot('YOUR_KEY_HERE', 'training', 'http://vindinium.org'); //Put your bot's code here and change training to Arena when you want to fight others.
-// var bot = new Bot('YOUR_KEY_HERE', 'arena', 'PRIVATE_SERVER_HERE'); //Put your bot's code here and change training to Arena when you want to fight others.
+//var bot = new Bot('w5h0k9sd', 'training', 'http://vindinium.org');
+var bot = new Bot('dx5k0rrp', 'arena', 'http://52.53.211.7:9000');// //Put your bot's code here and change training to Arena when you want to fight others.
 var goDir;
 var Promise = require('bluebird');
 Bot.prototype.botBrain = function() {
