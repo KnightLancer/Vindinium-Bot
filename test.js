@@ -17,19 +17,22 @@ Bot.prototype.botBrain = function() {
         var myDir;
         var myPos = [bot.yourBot.pos.x, bot.yourBot.pos.y];
 
+//These codes define who are enemy bots when your bot is the 1st, 2nd, 3rd, or 4th bot.//
         var enemyBots = [];
         if (bot.yourBot.id != 1) enemyBots.push(bot.bot1);
         if (bot.yourBot.id != 2) enemyBots.push(bot.bot2);
         if (bot.yourBot.id != 3) enemyBots.push(bot.bot3);
         if (bot.yourBot.id != 4) enemyBots.push(bot.bot4);
 
+//These codes define which mines on the field are enemies'.//
         var enemyMines =[];
         if(bot.yourBot.id !=1) enemyMines = enemyMines.concat(bot.bot1mines);
         if(bot.yourBot.id !=2) enemyMines = enemyMines.concat(bot.bot2mines);
         if(bot.yourBot.id !=3) enemyMines = enemyMines.concat(bot.bot3mines);
         if(bot.yourBot.id !=4) enemyMines = enemyMines.concat(bot.bot4mines);
         
-        
+       
+//This code defines enemy bots
         var closestBot = enemyBots[0];
         for(i = 0; i < enemyBots.length; i++){
             if(bot.findDistance(myPos,[closestBot.pos.x,closestBot.pos.y]) > bot.findDistance(myPos,[enemyBots[i].pos.x,enemyBots[i].pos.y])) {
@@ -37,26 +40,32 @@ Bot.prototype.botBrain = function() {
             }
         }
 
+//Heal at the tavern when health is equal to or less than 50 and if I hav at least 1 mine.//
         var task;
         if (bot.yourBot.life <= 50 && bot.yourBot.mineCount >= 1) {
             task = "lowlife";
         }
         
+//Collect free mines when there are any and I have less than 4 mines.//
         else if(bot.freeMines.mineCount > 0 && bot.yourBot.mineCount <=4) {
             task ="freemines";
         }
         
+//(Try to) Steal from other people by attacking their mines.//
         else if (bot.freeMines.mineCount = 0) {
             task="thievery";
         }
         
+//Attack others when their health is less than 25.//
         else if (bot.enemyBots.life <= 25) { 
             task="attack";
         }
         
+//Tavern spam when I have 6 or more mines.//
         else if (bot.yourBot.mineCount >=6)
             task="lowlife";
         
+//Most important priority: collect free mines.//
         else { 
             task="freemines";
         }
