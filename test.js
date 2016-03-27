@@ -1,5 +1,8 @@
+//Establish the Bot variable.//
 var Bot = require('bot');
+//Establish path finding.//
 var PF = require('pathfinding');
+//Toggle between a training server and the private server//
 var bot = new Bot('w5h0k9sd', 'training', 'http://vindinium.org');//
 //var bot = new Bot('dx5k0rrp', 'arena', 'http://52.53.211.7:9000');// //Put your bot's code here and change training to Arena when you want to fight others.
 var Promise = require('bluebird');
@@ -109,7 +112,7 @@ Bot.prototype.botBrain = function() {
                     closestEnemy = enemyBots[i];
                 }
             }
-            console.log("Step aside.");
+            console.log("You're in the way...");
             myDir = bot.findPath(myPos, [closestBot.pos.x , closestBot.pos.y]);
         }
         
