@@ -22,9 +22,10 @@
 
 <img src="https://s3.amazonaws.com/poly-screenshots.angel.co/Project/a0/120663/73d89cbf74dde0cacf22233ec6dc6a79-original.png"><br>
 
-<p class="General"> For the past week of the 21st of March, the Computer Science class has been working on this AI-based game called Vindinium, which combines the science of coding and the competitiveness of video gaming. The story is as follows: 4 heros scape a land for riches, often encountering other heros with the same objective. And when the heros grew weary of their travels, they spend their finds on a cream soda.  Using a code template given by our teacher, we students modified it in our own ways to make our heros, which we called "bots", perform different actions in order to achieve the title of victor.</p><br>
+<p class="General"> For the past week of the 21st of March, the Computer Science class has been working on this AI-based game called Vindinium, which combines the science of coding and the competitiveness of video gaming. The story is as follows: 4 heros scape a land for riches, often encountering other heros with the same objective. And when the heros grew weary of their travels, they spend their finds on a cream soda.  Using a code template given by our teacher, we students modified it in our own ways to make our heros, which we called "bots", perform different actions in order to achieve the title of victor. Victory can only be claimed when a hero has the most coins/gold/whatever you want to call it after a rapid 1200 turns, whereas one turn is passed when all 4 heroes have completed a move. Below is my own code, although it isn't great because I failed to code specific attack and coin-collecting functions.</p><br>
 
 <p>My whole code template:</p>
+<p>(Info about each code in the // marks.)</p>
 
 <p align="left" class="codetemplate">
 //Establish the Bot variable.//<br>
@@ -72,7 +73,7 @@ Bot.prototype.botBrain = function() {<br>
             }<br>
         }<br><br>
 
-//Heal at the tavern when health is equal to or less than 50 and if I<br> hav at least 1 mine.//<br>
+//Heal at the tavern when health is equal to or less than 50 and if I<br> have at least 1 mine.//<br>
         var task;<br>
         if (bot.yourBot.life <= 50 && bot.yourBot.mineCount >= 1) {<br>
             task = "lowlife";<br>
@@ -253,7 +254,7 @@ bot.runGame();<br>
         <td><b>Some of my own made up dictations</b></td>
     </tr>
     <tr>
-        <td>var closesTavern</td>
+        <td>var closestTavern</td>
         <td>A variable for the closest tavern to my Bot.</td>
     </tr>
     <tr>
@@ -269,5 +270,8 @@ bot.runGame();<br>
         <td>Another way of determining the closest mine.</td>
     </tr>
 </table>
+
+<h3>What I learned</h3>
+<p>Well, I learned a lot about coding automatic actions for bots, since when the games began you literally just watch your bot either be smart or stupid. The taverns, enemies, mines, etc. are literally defined as bot.mine or bot.enemyBot. Actions are depicted by "if...then...else..." statements. Var ___ = bot.___ terms are important for "if...then...else..." statements to understand what is what; you ust need to define the variable and what it equals to/represents. Finally, it takes more than just freeMines=0, var closeMines, and bot.enemyMines to steal an enemy mine, but I don't think I have the will to continue a steal code.</p>
     </body>
 </html>
