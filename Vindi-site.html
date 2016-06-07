@@ -12,7 +12,9 @@
             .codetemplate {
                 font-family:monospace;
             }
-
+            code {
+                border:1px solid white;
+            }
         </style>
     </head>
     <body>
@@ -22,94 +24,96 @@
 
 <img src="https://s3.amazonaws.com/poly-screenshots.angel.co/Project/a0/120663/73d89cbf74dde0cacf22233ec6dc6a79-original.png"><br>
 
-<p class="General"> For the past week of the 21st of March, the Computer Science class has been working on this AI-based game called Vindinium, which combines the science of coding and the competitiveness of video gaming. The story is as follows: 4 heros scape a land for riches, often encountering other heros with the same objective. And when the heros grew weary of their travels, they spend their finds on a cream soda.  Using a code template given by our teacher, we students modified it in our own ways to make our heros, which we called "bots", perform different actions in order to achieve the title of victor. Victory can only be claimed when a hero has the most coins/gold/whatever you want to call it after a rapid 1200 turns, whereas one turn is passed when all 4 heroes have completed a move. Below is my own code, although it isn't great because I failed to code specific attack and coin-collecting functions.</p><br>
+<p class="General"> For the past week of the 21st of March, the Computer Science class has been working on this AI-based game called Vindinium, which combines the science of coding and the competitiveness of video gaming. Basically the lore of the story is that 4 heroes set out to fulfill their selfish desires in acquiring gold, even if they have to kill each other. And when they're close to dying, they miraculously heal with cream soda.  Using a code template given by our teacher, we students modified it in our own ways to make our heros, which we called "bots", perform different actions in order to achieve the title of victor. Victory can only be claimed when a hero has the most coins/gold/whatever you want to call it after a rapid 1200 turns, whereas one turn is passed when all 4 heroes have completed a move. Below is my own code, although it isn't great because I failed to code specific attack and coin-collecting functions.</p><br>
 
 <p>My whole code template:</p>
-<p>(Info about each code in the // marks.)</p>
+<p>(Info about each code in between the // marks.)</p>
 
 <p align="left" class="codetemplate">
-//Establish the Bot variable.//<br>
-var Bot = require('bot');<br><br>
-//Establish the path finding function.//<br>
-var PF = require('pathfinding');<br><br>
-//Toggle between a training mode and the actual fighting in a private Vindinium server.//<br>
+<u>//System establishes the Bot variable.//</u><br>
+var Bot = require('bot');<br><br><br>
+
+<u>//System establish the path finding function for when a function needs to build a path for the bot.//</u><br>
+var PF = require('pathfinding');<br><br><br>
+
+<u>//Toggle between a training mode and actually fighting against others in a private Vindinium server.//</u><br>
 var bot = new Bot('w5h0k9sd', 'training', 'http://vindinium.org');//
-//var bot = new Bot('dx5k0rrp', 'arena', 'http://52.53.211.7:9000');// //Put your bot's code here and change training to Arena when you want to fight others.<br><br>
+//var bot = new Bot('dx5k0rrp', 'arena', 'http://52.53.211.7:9000');// <u>//Put your bot's code here and change training to Arena when you want to fight others.</u><br><br>
 var Promise = require('bluebird');<br>
 Bot.prototype.botBrain = function() {<br>
     return new Promise(function(resolve, reject) {<br>
         _this = bot;<br>
-        //////* Write your bot below Here *//////<br>
-        //////* Set `myDir` in the direction you want to go and then<br> bot.goDir is set to myDir at the bottom *////////<br>
-<br><br>
+        <u>//////* Write your bot below here *//////<br>
+        //////* Set `myDir` (aka my direction) in the direction you want to go and then<br> bot.goDir (your bot's direction) is set to myDir at the bottom *////////</u><br>
+<br><br><br>
         /*                                      *<br>
          * This Code is global data!            *<br>
-         *                                      */<br><br>
+         *                                      */<br><br><br>
 
-        // Set myDir to what you want and it will set bot.goDir to<br> that direction at the end.  Unless it is "none"<br>
+        <u>// Set myDir to what you want and it will set bot.goDir to<br> that direction at the end.  Unless it is "none"</u><br>
         var myDir;<br>
-        var myPos = [bot.yourBot.pos.x, bot.yourBot.pos.y];<br><br>
+        var myPos = [bot.yourBot.pos.x, bot.yourBot.pos.y];<br><br><br>
 
-//These codes define who are enemy bots when your bot is the 1st, 2nd, 3rd, or 4th bot.//<br>
+<u>//These codes define who are enemy bots when your bot is the 1st, 2nd, 3rd, or 4th bot.//</u><br>
         var enemyBots = [];<br>
         if (bot.yourBot.id != 1) enemyBots.push(bot.bot1);<br>
         if (bot.yourBot.id != 2) enemyBots.push(bot.bot2);<br>
         if (bot.yourBot.id != 3) enemyBots.push(bot.bot3);<br>
-        if (bot.yourBot.id != 4) enemyBots.push(bot.bot4);<br><br>
+        if (bot.yourBot.id != 4) enemyBots.push(bot.bot4);<br><br><br>
 
-//These codes define which mines on the field are enemies'.//<br>
+<u>//These codes define which mines on the field are enemies'.//</u><br>
         var enemyMines =[];<br>
         if(bot.yourBot.id !=1) enemyMines = enemyMines.concat(bot<br>.bot1mines);<br>
         if(bot.yourBot.id !=2) enemyMines = enemyMines.concat(bot<br>.bot2mines);<br>
         if(bot.yourBot.id !=3) enemyMines = enemyMines.concat(bot<br>.bot3mines);<br>
-        if(bot.yourBot.id !=4) enemyMines = enemyMines.concat(bot<br>.bot4mines);<br><br>
+        if(bot.yourBot.id !=4) enemyMines = enemyMines.concat(bot<br>.bot4mines);<br><br><br>
         
        
-//This code defines enemy bots<br>
+<u>//This code defines enemy bots further, whereas the closest bot to yours is enemy bot 1-4</u><br>
         var closestBot = enemyBots[0];<br>
         for(i = 0; i < enemyBots.length; i++){<br>
             if(bot.findDistance(myPos,[closestBot.pos.x,closestBot<br>.pos.y]) > bot.findDistance(myPos,[enemyBots[i].pos<br>.x,enemyBots[i].pos.y])) {<br>
                 closestBot=enemyBots[i];<br>
             }<br>
-        }<br><br>
+        }<br><br><br>
 
-//Heal at the tavern when health is equal to or less than 50 and if I<br> have at least 1 mine.//<br>
+<u>//Heal at the tavern when health is equal to or less than 50 and if I<br> have at least 1 mine.//</u><br>
         var task;<br>
         if (bot.yourBot.life <= 50 && bot.yourBot.mineCount >= 1) {<br>
             task = "lowlife";<br>
-        }<br><br>
+        }<br><br><br>
         
-//Collect free mines when there are any and I have less than 4 mines<br>.//<br>
+<u>//Collect free mines when there are any and I have less than 4 mines</u><br>.//<br>
         else if(bot.freeMines.mineCount > 0 && bot.yourBot.mineCount<br> <=4) {<br>
             task ="freemines";<br>
-        }<br><br>
+        }<br><br><br>
         
-//(Try to) Steal from other people by attacking their mines.//<br>
+<u>//(Try to) Steal from other people by attacking their mines.//</u><br>
         else if (bot.freeMines.mineCount = 0) {<br>
             task="thievery";<br>
-        }<br><br>
+        }<br><br><br>
         
-//Attack others when their health is less than 25.//<br>
+<u>//Attack others when their health is less than 25.//</u><br>
         else if (bot.enemyBots.life <= 25) { <br>
             task="attack";<br>
-        }<br><br>
+        }<br><br><br>
         
-//Tavern spam when I have 6 or more mines.//<br>
+<u>//Tavern spam when I have 6 or more mines.//</u><br>
         else if (bot.yourBot.mineCount >=6)<br>
             task="lowlife";<br><br>
         
-//Most important priority: collect free mines.//<br>
+<u>//Most important priority: collect free mines.//</u><br>
         else { <br>
             task="freemines";<br>
-        }<br><br>
+        }<br><br><br>
         
         
 
 
 
         /*                                      *<br>
-         * This Code Determines HOW to do it    *<br>
-         *                                      */<br><br>
+         * This Code Determines HOW to do it each task listed above    *<br>
+         *                                      */<br><br><br>
 
         if (task === "lowlife") {<br>
             var closestTavern = bot.taverns[0];<br>
@@ -120,10 +124,9 @@ Bot.prototype.botBrain = function() {<br>
             }<br>
             console.log("I've lost too much blood...!");<br>
             myDir = bot.findPath(myPos, closestTavern);<br>
-        }<br><br>
+        }<br><br><br>
         
 
-        
         if (task === "freemines") {<br>
             var closestMine = bot.freeMines[0];<br>
             for (i = 0; i < bot.freeMines.length; i++) {<br>
@@ -133,7 +136,7 @@ Bot.prototype.botBrain = function() {<br>
             }<br>
             console.log("No one's taken this mine?");<br>
             myDir = bot.findPath(myPos, closestMine);<br>
-        }<br><br>
+        }<br><br><br>
 
         if (task === "attack") {<br>
             var closestEnemy = enemyBots[0];<br>
@@ -144,7 +147,7 @@ Bot.prototype.botBrain = function() {<br>
             }<br>
             console.log("Step aside.");<br>
             myDir = bot.findPath(myPos, [closestBot.pos.x , closestBot.pos.y]);<br>
-        }<br><br>
+        }<br><br><br/>
         
         if (task === "thievery") {<br>
             var closeMine = enemyMines[0];<br>
@@ -155,11 +158,9 @@ Bot.prototype.botBrain = function() {<br>
             }<br>
             console.log("I'll take that!");<br>
             myDir = bot.findPath (myPos, closeMine);<br>
-        }<br><br>
+        }<br><br><br>
 
-
-        /*       <br>                                                                                                                       *<br>
-         * This Code Sets your direction based on myDir.  If you are trying to go to a place that you can't reach, you move randomly.  <br> *<br>
+         * This Code Sets your direction based on myDir.  If you are trying to go to a place that you can't reach, you move randomly.  <br>
          * Otherwise you move in the direction set by your code.  Feel free to change this code if you want.*/<br>
         if (myDir === "none") {<br>
             console.log("Watashi wa nani o yatte iru...");<br>
@@ -169,15 +170,16 @@ Bot.prototype.botBrain = function() {<br>
         }<br>
         else {<br>
             bot.goDir = myDir;<br>
-        }<br><br><br>
+        }<br><br><br><br>
 
 
 
-        ///////////* DON'T REMOVE ANTYTHING BELOW THIS LINE *//////////////<br>
+        <u>///////////* DON'T REMOVE ANTYTHING BELOW THIS LINE *//////////////</u><br>
         resolve();<br>
     });<br>
 };<br>
 bot.runGame();<br>
+<u>//This tells the system that this is the end of the code and to run it.</u>//
 </p>
 <br><br>
 
@@ -232,7 +234,7 @@ bot.runGame();<br>
     </tr>
     <tr>
         <td>var myDir</td>
-        <td>a.k.a. My Direction; tels the system you're about to tamper with the directional movements of your Bot.</td>
+        <td>a.k.a. My Direction; tells the system you're about to tamper with the directional movements of your Bot.</td>
     </tr>
     <tr>
         <td>var myPos</td>
@@ -245,6 +247,10 @@ bot.runGame();<br>
     <tr>
         <td>var enemyMines</td>
         <td>Enemy mines</td>
+    </tr>
+    <tr>
+        <td>console.log</td>
+        <td>A way for JavaScript to display data or record info about what JavaScript is doing.</td>
     </tr>
     <tr>
         <td>Math.floor(Math.random() * number)</td>
@@ -272,6 +278,6 @@ bot.runGame();<br>
 </table>
 
 <h3>What I learned</h3>
-<p>Well, I learned a lot about coding automatic actions for bots, since when the games began you literally just watch your bot either be smart or stupid. The taverns, enemies, mines, etc. are literally defined as bot.mine or bot.enemyBot. Actions are depicted by "if...then...else..." statements. Var ___ = bot.___ terms are important for "if...then...else..." statements to understand what is what; you ust need to define the variable and what it equals to/represents. Finally, it takes more than just freeMines=0, var closeMines, and bot.enemyMines to steal an enemy mine, but I don't think I have the will to continue a steal code.</p>
+<p>Well, I learned a lot about coding automatic actions for bots, since when the games began you literally just watch your bot either be smart or stupid. The taverns, enemies, mines, etc. are literally defined as bot.mine or bot.enemyBot. Actions are depicted by "if...then...else..." statements. Var __(something)__ = bot.__(something)__ terms are important for "if...then...else..." statements to understand what is what; you ust need to define the variable and what it equals to/represents. Finally, it takes more than just freeMines=0, var closeMines, and bot.enemyMines to steal an enemy mine, but I don't think I have the will to continue a steal code.</p>
     </body>
 </html>
